@@ -1,0 +1,46 @@
+version: "3"
+services:
+  namenode:
+    image: uhopper/hadoop-namenode:2.8.1
+    hostname: namenode
+    container_name: namenode
+    networks:
+      - hadoop
+    volumes:
+      - namenode:/hadoop/dfs/name
+    env_file:
+      - ./hadoop-basic.env
+    environment:
+      - CLUSTER_NAME=hadoop-cluster
+
+  datanode1:
+    image: uhopper/hadoop-datanode:2.8.1
+    hostname: datanode1
+    container_name: datanode1
+    networks:
+      - hadoop
+    volumes:
+      - datanode1:/hadoop/dfs/data
+    env_file:
+      - ./hadoop-basic.env
+
+  datanode2:
+    image: uhopper/hadoop-datanode:2.8.1
+    hostname: datanode2
+    container_name: datanode2
+    networks:
+      - hadoop
+    volumes:
+      - datanode2:/hadoop/dfs/data
+    env_file:
+      - ./hadoop-basic.env
+
+networks:
+  hadoop:
+
+volumes:
+  namenode:
+  datanode1:
+  datanode2:
+
+# vim: sw=2
